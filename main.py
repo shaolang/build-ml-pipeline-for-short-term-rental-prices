@@ -129,8 +129,14 @@ def go(config: DictConfig):
             ##################
             # Implement here #
             ##################
-
-            pass
+            _ = mlflow.run(
+                f"{config['main']['components_repository']}/test_regression_model",
+                 "main",
+                 parameters={
+                     'test_dataset': "test_data.csv:latest",
+                     'mlflow_model': 'random_forest_export:prod',
+                 },
+            )
 
 
 if __name__ == "__main__":
